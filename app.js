@@ -31,7 +31,7 @@ class Card {
         this.suit = suit;
     }
     getImageUrl() {
-        console.log(`/images/PNG/${this.points}${this.suit}.png`);
+        return `/images/PNG/${this.points}${this.suit}.png`;
     }
 
 }
@@ -50,8 +50,40 @@ console.log(card2.points + ' ' + card2.suit);
 // added method to the class above
 
 let cardImg = document.createElement('img');
-let renderedCardImg = cardImg.appendChild(card1.getImageUrl());
-document.getElementById('cardRender').appendChild(renderedCardImg);
-//card1.getImageUrl()
+// If I had time I could create a whole deck of cards ... but this is a hard-coded way of displaying the card image
+cardImg.src = card1.getImageUrl();
+//document.getElementById('cardRender').appendChild(cardImg);
+
 
 /* see https://stackoverflow.com/questions/7932759/dom-appendchild-to-insert-images */
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/* Hand Constructor */
+
+class Hand {
+    constructor() {
+        this.cards = [];
+    }
+    addCard(card) {
+        this.cards.push(card)
+    }
+    getPoints(card) {
+        for (let i = 0; i < this.cards.length; i++) {
+            var sum = 0
+            sum += this.cards[i].points
+        }
+        console.log(sum)
+        }
+}
+
+let myHand = new Hand();
+myHand.addCard(new Card(5,'Diamonds'))
+myHand.addCard(new Card(12, 'Spades'))
+
+// the way i've constructed getPoints is only returning the last card in the array's point value
+// spend a lot of time looking for answer, apparently related to way objects reference, but I still can't get it
+
+myHand.getPoints();
+console.log(myHand);
